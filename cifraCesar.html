@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cifra de César</title>
+
+    <style>
+        #idFlex {
+            display: flex;
+        }
+
+        #idDivCifra {
+            text-align: center;
+            width: 60px;
+        }
+
+        #idCifra {
+            width: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="">
+        <textarea name="nmMensagem" id="idMensagem" cols="22" rows="1" placeholder="Mensagem"></textarea><br>
+
+        <div id="idFlex">
+            <div id="idDivRadioButtons">
+                <input type="radio" name="nmRadioCifrado" id="idRadioCifrado" checked>
+                <label for="">Texto Cifrado</label> <br>
+
+                <input type="radio" name="nmRadioDecifrado" id="idRadioDecifrado">
+                <label for="">Texto Decifrado</label><br>
+            </div>
+
+            <div id="idDivCifra">
+                <label for="">Cifra:</label><br>
+                <input type="text" name="nmCifra" id="idCifra" maxlength="1">
+            </div>
+        </div>
+
+        <br>
+        <input type="button" value="Cifrar/Decifrar">
+
+    </form>
+    <script>
+        var mensagem = document.getElementById("idMensagem")
+        var cifra = document.getElementById("idCifra")
+        var cifrar = document.querySelector("input[name=nmRadioCifrado]:checked").value;
+        var decifrar = document.querySelector("input[name=nmRadioDecifrado]:checked").value;
+
+        
+
+
+    </script>
+</body>
+
+</html>
