@@ -36,13 +36,16 @@
             </div>
         </div>
         <br>
-        <input type="button" value="Cifrar/Decifrar" id="idBotao">
+        <input type="button" value="Cifrar/Decifrar" id="idBotao"><br><br>
+
+        <output id="idOut"></output>
     </form>
     <script>
         //var mensagem = document.getElementById("idMensagem").value;
         var cifra = document.getElementById("idCifra").value;
         
         var botao = document.getElementById("idBotao")
+        var out = document.getElementById("idOut");
 
         var alfabeto = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
         //               97   98   99
@@ -106,6 +109,8 @@
             }
             console.log(mensagem)
             console.log("cifrado: "+mensagemCifrada)
+
+            out.value = "Mensagem cifrada: "+mensagemCifrada;
         }
 
         function decifrar() {
@@ -132,6 +137,8 @@
             }
             console.log(mensagem)
             console.log("decifrado: "+mensagemDecifrada)
+
+            out.value = "Mensagem decifrada: "+mensagemDecifrada
         }
 
 
