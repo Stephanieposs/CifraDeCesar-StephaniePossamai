@@ -6,60 +6,86 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cifra de César</title>
     <style>
+        * {
+            justify-content: space-around;
+            text-align: center;
+            background-color: rgb(187, 253, 231);
+        }
+
         #idFlex {
             display: flex;
+            justify-content: center;
+            text-align: left;
+
         }
+
         #idDivCifra {
             text-align: center;
             width: 60px;
+
         }
+
         #idCifra {
             width: 12px;
         }
+
+        #idDivRadioButtons {
+            text-align: left;
+        }
+
+        fieldset {
+            border-width: 0.1px;
+            margin-top: 0.5rem;
+            margin-inline: 40%;
+        }
+
     </style>
 </head>
 
 <body>
-    <form action="">
-        <textarea name="nmMensagem" id="idMensagem" cols="22" rows="1" placeholder="Mensagem" value=""></textarea><br>
-        <div id="idFlex">
-            <div id="idDivRadioButtons">
-                <input type="radio" name="nmRadioCifrado" id="idRadioCifrado" value="cifrar" checked>
-                <label for="">Cifrar o texto</label> <br>
+    <form action="" id="idForm">
+        <fieldset id="idFieldset">
+            <textarea name="nmMensagem" id="idMensagem" cols="30" rows="1" placeholder="Mensagem"
+                value=""></textarea><br>
+            <div id="idFlex">
+                <div id="idDivRadioButtons">
+                    <input type="radio" name="nmRadioCifrado" id="idRadioCifrado" value="cifrar" checked>
+                    <label for="">Cifrar o texto</label> <br>
 
-                <input type="radio" name="nmRadioCifrado" id="idRadioDecifrado" value="decifrar">
-                <label for="">Decifrar o texto</label><br>
+                    <input type="radio" name="nmRadioCifrado" id="idRadioDecifrado" value="decifrar">
+                    <label for="">Decifrar o texto</label><br>
+                </div>
+                <div id="idDivCifra">
+                    <label for="">Cifra:</label><br>
+                    <input type="text" name="nmCifra" id="idCifra" maxlength="1">
+                </div>
             </div>
-            <div id="idDivCifra">
-                <label for="">Cifra:</label><br>
-                <input type="text" name="nmCifra" id="idCifra" maxlength="1">
-            </div>
-        </div>
-        <br>
-        <input type="button" value="Cifrar/Decifrar" id="idBotao"><br><br>
+            <br>
+            <input type="button" value="Cifrar/Decifrar" id="idBotao"><br><br>
 
-        <output id="idOut"></output>
+            <output id="idOut"></output>
+        </fieldset>
     </form>
     <script>
         //var mensagem = document.getElementById("idMensagem").value;
         var cifra = document.getElementById("idCifra").value;
-        
+
         var botao = document.getElementById("idBotao")
         var out = document.getElementById("idOut");
 
-        var alfabeto = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+        var alfabeto = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
         //               97   98   99
         var cifraNumerica = 0;
         var valorASCII = 0;
 
         botao.addEventListener("click", cifrarOuDecifrar)
-        
-        function cifrarOuDecifrar(){
+
+        function cifrarOuDecifrar() {
             let radioCifrar = document.querySelector("input[name=nmRadioCifrado]:checked").value
-            if(radioCifrar == "cifrar"){
+            if (radioCifrar == "cifrar") {
                 console.log("entrou aqui cifrar")
                 cifrar();
-            }else{
+            } else {
                 console.log("entrou aqui decifrar")
                 decifrar();
             }
@@ -88,47 +114,47 @@
 
         function cifrar() {
             let cifraNoVetor = cifraNum();
-            let mensagemCifrada = ""; 
+            let mensagemCifrada = "";
 
             var mensagem = document.getElementById("idMensagem").value;
 
             for (let i = 0; i < mensagem.length; i++) {
                 for (let index = 0; index < alfabeto.length; index++) {
-                    if(mensagem[i] == alfabeto[index]){   
-                        if(index+cifraNoVetor >= alfabeto.length){
-                            mensagemCifrada += alfabeto[(index + cifraNoVetor)-(alfabeto.length)]
-                        }else{
+                    if (mensagem[i] == alfabeto[index]) {
+                        if (index + cifraNoVetor >= alfabeto.length) {
+                            mensagemCifrada += alfabeto[(index + cifraNoVetor) - (alfabeto.length)]
+                        } else {
                             mensagemCifrada += alfabeto[index + cifraNoVetor]
                         }
-                        
-                    }else if(mensagem[i] == " "){
+
+                    } else if (mensagem[i] == " ") {
                         mensagemCifrada += " "
                         index = alfabeto.length;
                     }
                 }
             }
             console.log(mensagem)
-            console.log("cifrado: "+mensagemCifrada)
+            console.log("cifrado: " + mensagemCifrada)
 
-            out.value = "Mensagem cifrada: "+mensagemCifrada;
+            out.value = "Mensagem cifrada: " + mensagemCifrada;
         }
 
         function decifrar() {
             let cifraNoVetor = cifraNum();
-            let mensagemDecifrada = ""; 
+            let mensagemDecifrada = "";
 
             var mensagem = document.getElementById("idMensagem").value;
 
             for (let i = 0; i < mensagem.length; i++) {
                 for (let index = 0; index < alfabeto.length; index++) {
-                    if(mensagem[i] == alfabeto[index]){
-                        if((index-cifraNoVetor)< 0){
-                            mensagemDecifrada += alfabeto[(alfabeto.length ) + (index-cifraNoVetor)]
-                        }else{
-                            mensagemDecifrada += alfabeto[(index-cifraNoVetor)]
+                    if (mensagem[i] == alfabeto[index]) {
+                        if ((index - cifraNoVetor) < 0) {
+                            mensagemDecifrada += alfabeto[(alfabeto.length) + (index - cifraNoVetor)]
+                        } else {
+                            mensagemDecifrada += alfabeto[(index - cifraNoVetor)]
                         }
-                        
-                    }else if(mensagem[i] == " "){
+
+                    } else if (mensagem[i] == " ") {
                         mensagemDecifrada += " "
                         index = alfabeto.length;
                     }
@@ -136,9 +162,9 @@
                 }
             }
             console.log(mensagem)
-            console.log("decifrado: "+mensagemDecifrada)
+            console.log("decifrado: " + mensagemDecifrada)
 
-            out.value = "Mensagem decifrada: "+mensagemDecifrada
+            out.value = "Mensagem decifrada: " + mensagemDecifrada
         }
 
 
