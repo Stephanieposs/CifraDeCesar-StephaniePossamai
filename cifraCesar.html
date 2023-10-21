@@ -41,22 +41,26 @@
     <script>
         //var mensagem = document.getElementById("idMensagem").value;
         var cifra = document.getElementById("idCifra").value;
-        var radioCifrar = document.querySelector("input[name=nmRadioCifrado]:checked").value;
+        
         var botao = document.getElementById("idBotao")
 
-        var alfabeto = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+        var alfabeto = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
         //               97   98   99
         var cifraNumerica = 0;
         var valorASCII = 0;
 
+        botao.addEventListener("click", cifrarOuDecifrar)
         
-        if(radioCifrar == "cifrar"){
-            botao.addEventListener("click", cifrar)
-        }else if(radioCifrar == "decifrar"){
-            botao.addEventListener("click", decifrar)
+        function cifrarOuDecifrar(){
+            let radioCifrar = document.querySelector("input[name=nmRadioCifrado]:checked").value
+            if(radioCifrar == "cifrar"){
+                console.log("entrou aqui cifrar")
+                cifrar();
+            }else{
+                console.log("entrou aqui decifrar")
+                decifrar();
+            }
         }
-        
-        
 
         function cifraNum() {
             var cifra = document.getElementById("idCifra").value;
@@ -82,26 +86,26 @@
         function cifrar() {
             let cifraNoVetor = cifraNum();
             let mensagemCifrada = ""; 
-            
 
             var mensagem = document.getElementById("idMensagem").value;
 
-            console.log(mensagem);
-
             for (let i = 0; i < mensagem.length; i++) {
                 for (let index = 0; index < alfabeto.length; index++) {
-                    if(mensagem[i] == alfabeto[index]){
+                    if(mensagem[i] == alfabeto[index]){   
+                        if(index+cifraNoVetor >= alfabeto.length){
+                            mensagemCifrada += alfabeto[(index + cifraNoVetor)-(alfabeto.length)]
+                        }else{
+                            mensagemCifrada += alfabeto[index + cifraNoVetor]
+                        }
                         
-                        mensagemCifrada += alfabeto[index + cifraNoVetor]
                     }else if(mensagem[i] == " "){
                         mensagemCifrada += " "
                         index = alfabeto.length;
                     }
-
                 }
             }
             console.log(mensagem)
-            console.log(mensagemCifrada)
+            console.log("cifrado: "+mensagemCifrada)
         }
 
         function decifrar() {
@@ -110,13 +114,15 @@
 
             var mensagem = document.getElementById("idMensagem").value;
 
-            console.log(mensagem);
-
             for (let i = 0; i < mensagem.length; i++) {
                 for (let index = 0; index < alfabeto.length; index++) {
                     if(mensagem[i] == alfabeto[index]){
+                        if((index-cifraNoVetor)< 0){
+                            mensagemDecifrada += alfabeto[(alfabeto.length ) + (index-cifraNoVetor)]
+                        }else{
+                            mensagemDecifrada += alfabeto[(index-cifraNoVetor)]
+                        }
                         
-                        mensagemDecifrada += alfabeto[(index-cifraNoVetor)]
                     }else if(mensagem[i] == " "){
                         mensagemDecifrada += " "
                         index = alfabeto.length;
@@ -125,7 +131,7 @@
                 }
             }
             console.log(mensagem)
-            console.log(mensagemDecifrada)
+            console.log("decifrado: "+mensagemDecifrada)
         }
 
 
